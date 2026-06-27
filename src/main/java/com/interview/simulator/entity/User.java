@@ -37,7 +37,6 @@ public class User {
     @Column(name = "full_name", length = 100)
     private String fullName;
 
-    
     @Column(name = "is_active")
     private boolean active = true;
 
