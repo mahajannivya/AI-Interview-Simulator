@@ -37,9 +37,7 @@ public class User {
     @Column(name = "full_name", length = 100)
     private String fullName;
 
-    // Bug fix: renamed from "isActive" to "active" to avoid Lombok/Hibernate naming conflict.
-    // Lombok generates isActive()/setActive() for "isActive" field, but Hibernate maps "isActive"
-    // to column "is_active" and then can't find getter "getActive()". Using "active" is cleaner.
+    
     @Column(name = "is_active")
     private boolean active = true;
 
