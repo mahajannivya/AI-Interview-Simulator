@@ -34,7 +34,7 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "full_name", length = 100)
+    @Column(name = "full_name", length = 120)
     private String fullName;
 
     @Column(name = "is_active")
