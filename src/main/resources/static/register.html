@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Interview Simulator</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="logo"></div>
+            <h1>Create Account</h1>
+            <p>Start practicing interviews today</p>
+        </div>
+        <div id="error-msg" class="alert alert-error" style="display:none"></div>
+        <div id="success-msg" class="alert alert-success" style="display:none"></div>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <input type="text" id="username" placeholder="Choose a username" required minlength="3">
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" placeholder="Min 6 characters" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="registerBtn">
+                Create Account
+            </button>
+        </form>
+        <p class="auth-switch">
+            Already have an account? <a href="/index.html">Sign in</a>
+        </p>
+    </div>
+</div>
+<script src="/js/auth.js"></script>
+</body>
+</html>
