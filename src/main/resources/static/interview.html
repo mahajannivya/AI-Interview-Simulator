@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview – AI Simulator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/interview.css">
+</head>
+
+<body>
+
+<!-- ============================================================
+     SYSTEM CHECK OVERLAY
+============================================================ -->
+
+<div id="systemCheckOverlay" class="system-overlay">
+
+    <div class="system-card">
+
+        <div class="system-header">
+            <div class="system-icon">🤖</div>
+            <h2>AI Interview System Check</h2>
+            <p>Before starting your interview, please complete all system checks below.</p>
+        </div>
+
+        <div class="system-checks">
+
+            <div class="check-item" id="cameraCheck">
+                <div class="check-left">📷 Camera</div>
+                <div class="check-right">
+                    <span class="status waiting" id="cameraCheckStatus">Waiting…</span>
+                </div>
+            </div>
+
+            <div class="check-item" id="microphoneCheck">
+                <div class="check-left">🎤 Microphone</div>
+                <div class="check-right">
+                    <span class="status waiting" id="micCheckStatus">Waiting…</span>
+                </div>
+            </div>
+
+            <div class="check-item" id="internetCheck">
+                <div class="check-left">🌐 Internet</div>
+                <div class="check-right">
+                    <span class="status waiting" id="internetCheckStatus">Waiting…</span>
+                </div>
+            </div>
+
+            <div class="check-item" id="browserCheck">
+                <div class="check-left">🖥️ Browser</div>
+                <div class="check-right">
+                    <span class="status waiting" id="browserCheckStatus">Waiting…</span>
+                </div>
+            </div>
+
+            <div class="check-item" id="fullscreenCheck">
+                <div class="check-left">⛶ Full Screen</div>
+                <div class="check-right">
+                    <span class="status waiting" id="fullscreenCheckStatus">Waiting…</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="camera-preview-section">
+            <h3>Camera Preview</h3>
+            <video id="systemCameraPreview" autoplay muted playsinline></video>
+        </div>
+
+        <div class="system-footer">
+            <button class="btn btn-secondary btn-lg" id="runSystemCheckBtn">
+                Run System Check
+            </button>
+            <button class="btn btn-success btn-lg" id="startInterviewBtn" disabled>
+                Start Interview
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     COUNTDOWN OVERLAY
+============================================================ -->
+
+<div id="countdownOverlay" class="countdown-overlay" aria-hidden="true">
+    <div class="countdown-box">
+        <div class="countdown-title">Interview starts in</div>
+        <div id="countdownNumber" aria-live="polite">3</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     WARNING POPUP
+============================================================ -->
+
+<div id="warningPopup" class="warning-popup" role="alert" aria-live="assertive" aria-hidden="true">
+    <div class="warning-header">⚠ Warning</div>
+    <div id="warningMessage" class="warning-body">Violation detected.</div>
+    <div class="warning-footer">
+        Warnings: <span id="warningCounter">0 / 3</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+
+<nav class="navbar" role="navigation" aria-label="Interview navigation">
+    <div class="nav-brand">🤖 Interview Simulator</div>
+    <div class="nav-links">
+        <a href="/dashboard.html" class="nav-link">Dashboard</a>
+        <button class="btn btn-outline btn-sm btn-danger" id="endBtn">
+            End Interview
+        </button>
+    </div>
+</nav>
+
+<!-- ============================================================
+     TIMER BAR  (below navbar)
+============================================================ -->
+
+<div id="timerBar" class="timer-bar" aria-label="Question timer" aria-hidden="true">
+    <div id="timerFill" class="timer-fill"></div>
+    <span id="timerLabel" class="timer-label">60s</span>
+</div>
+
+<!-- ============================================================
+     MAIN CONTAINER
+============================================================ -->
+
+<div class="interview-wrapper">
+
+    <!-- =================== SIDEBAR =================== -->
+
+    <aside class="interview-sidebar" aria-label="Interview progress">
+
+        <div class="session-info">
+            <div class="session-badge" id="sessionCategory">Loading…</div>
+
+            <div class="progress-section">
+                <div class="progress-label">
+                    Question <span id="currentQ">1</span> of <span id="totalQ">10</span>
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="mode-badge" id="modeBadge">TEXT MODE</div>
+        </div>
+
+        <div class="score-tracker">
+            <h4>Score Tracker</h4>
+            <div id="scoreList" class="score-list" aria-live="polite"></div>
+        </div>
+
+        <!-- CAMERA — in sidebar so it never overlaps main content -->
+        <div id="cameraContainer" aria-label="Live camera preview">
+            <div id="cameraHeader">📷 Live Camera</div>
+            <video id="cameraVideo" autoplay muted playsinline aria-hidden="true"></video>
+            <div id="cameraStatus" aria-live="polite">Camera Not Connected</div>
+        </div>
+
+    </aside>
+
+    <!-- =================== MAIN =================== -->
+
+    <main class="interview-main" id="interviewMain" role="main">
+
+        <!-- QUESTION PANEL -->
+        <section class="question-panel" id="questionPanel" aria-label="Current question">
+
+            <div class="question-meta">
+                <span class="question-number">Question <span id="qNum">1</span></span>
+                <span class="question-category" id="questionCategory"></span>
+            </div>
+
+            <div class="question-text" id="questionText" aria-live="polite">
+                <div class="ai-thinking" aria-label="Loading question">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span>AI is generating your question…</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ANSWER PANEL -->
+        <section class="answer-panel" id="answerPanel" aria-label="Your answer" hidden>
+
+            <label class="answer-label" for="answerText">Your Answer</label>
+
+            <!-- VOICE CONTROLS (shown only in VOICE mode) -->
+            <div id="voiceControls" class="voice-controls" hidden>
+
+                <button class="btn btn-outline" id="listenBtn" aria-label="Listen to question">
+                    🔊 Listen Again
+                </button>
+                <button class="btn btn-primary" id="micBtn" aria-label="Start speaking">
+                    🎤 Start Speaking
+                </button>
+                <button class="btn btn-danger" id="stopMicBtn" aria-label="Stop speaking" disabled>
+                    ⏹ Stop
+                </button>
+
+                <div id="voiceStatus" class="voice-status" aria-live="polite">
+                    Waiting…
+                </div>
+
+            </div>
+
+            <textarea
+                    id="answerText"
+                    rows="8"
+                    placeholder="Type your answer here. Be thorough and specific…"
+                    aria-label="Answer input"
+                    spellcheck="true"
+            ></textarea>
+
+            <div class="answer-actions">
+                <span id="charCount" class="char-count">0 characters</span>
+                <button id="submitBtn" class="btn btn-primary btn-lg">
+                    Submit Answer →
+                </button>
+            </div>
+
+        </section>
+
+        <!-- EVALUATION PANEL -->
+        <section class="eval-panel" id="evalPanel" aria-label="AI Evaluation" hidden>
+
+            <h3>AI Evaluation</h3>
+
+            <div class="score-display">
+                <div id="evalScore" class="score-circle" aria-label="Score">—</div>
+                <span class="score-denom">/ 10</span>
+            </div>
+
+            <div class="eval-sections">
+
+                <div class="eval-card eval-strength">
+                    <h4>✅ Strengths</h4>
+                    <p id="evalStrengths"></p>
+                </div>
+
+                <div class="eval-card eval-weakness">
+                    <h4>⚠ Weaknesses</h4>
+                    <p id="evalWeaknesses"></p>
+                </div>
+
+                <div class="eval-card eval-suggest">
+                    <h4>💡 Suggestions</h4>
+                    <p id="evalSuggestions"></p>
+                </div>
+
+            </div>
+
+            <button id="nextBtn" class="btn btn-primary btn-lg">
+                Next Question →
+            </button>
+
+        </section>
+
+        <!-- LOADING OVERLAY (inside main so it overlays panels) -->
+        <div id="loadingOverlay" class="loading-overlay" aria-hidden="true" hidden>
+            <div class="ai-thinking large">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span id="loadingText">AI is evaluating your answer…</span>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ============================================================
+     FOOTER STATUS BAR
+============================================================ -->
+
+<footer id="interviewStatusBar" role="status" aria-label="System status">
+
+    <div class="status-item">
+        <span class="status-dot" id="internetDot" aria-hidden="true"></span>
+        <span id="internetLabel">Internet</span>
+    </div>
+
+    <div class="status-item">
+        <span class="status-dot" id="cameraDot" aria-hidden="true"></span>
+        <span id="cameraLabel">Camera</span>
+    </div>
+
+    <div class="status-item">
+        <span class="status-dot" id="fullscreenDot" aria-hidden="true"></span>
+        <span id="fullscreenLabel">Fullscreen</span>
+    </div>
+
+    <div class="status-item">
+        <span class="status-dot" id="micDot" aria-hidden="true"></span>
+        <span id="micLabel">Microphone</span>
+    </div>
+
+</footer>
+
+<!-- ============================================================
+     SCRIPTS  (auth.js first, then interview.js)
+============================================================ -->
+
+<script src="/js/auth.js"></script>
+<script src="/js/interview.js"></script>
+
+</body>
+</html>
