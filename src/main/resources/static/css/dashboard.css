@@ -1,0 +1,377 @@
+/* ==========================================
+   Dashboard & Shared Page Styles
+   ========================================== */
+
+/* ---- Profile Section ---- */
+.profile-section {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #7C3AED);
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.profile-info h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 2px; }
+.profile-info p { color: var(--text-muted); font-size: 0.88rem; }
+
+/* ---- Category Grid ---- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+.category-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.category-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(79,70,229,0.15);
+    transform: translateY(-2px);
+}
+.category-icon { font-size: 2.2rem; margin-bottom: 0.7rem; display: block; }
+.category-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.category-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+/* ---- Results Page ---- */
+.results-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.results-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem; }
+.results-header p { color: var(--text-muted); }
+
+.overall-score-card {
+    background: linear-gradient(135deg, var(--primary), #7C3AED);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.big-score { font-size: 4rem; font-weight: 900; line-height: 1; }
+.big-score-label { font-size: 1rem; opacity: 0.85; margin: 0.5rem 0; }
+.score-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* ---- Score Chart (results) ---- */
+.score-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 160px;
+    padding: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.score-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+}
+.score-bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    background: var(--primary);
+    transition: height 0.5s ease;
+    min-height: 4px;
+}
+.score-bar.low { background: var(--danger); }
+.score-bar.mid { background: var(--warning); }
+.score-bar.high { background: var(--success); }
+.score-bar-label { font-size: 0.7rem; color: var(--text-muted); text-align: center; }
+.score-bar-val { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+
+/* ---- Detailed Review Cards ---- */
+.review-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+.review-question { font-weight: 600; font-size: 0.95rem; flex: 1; }
+.review-score {
+    font-size: 1.4rem;
+    font-weight: 800;
+    min-width: 48px;
+    text-align: right;
+}
+.review-answer {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--border);
+}
+.review-feedback {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    font-size: 0.82rem;
+}
+.feedback-item { padding: 8px 12px; border-radius: 8px; }
+.feedback-item strong { display: block; font-size: 0.78rem; margin-bottom: 4px; }
+.fb-strength { background: var(--success-light); }
+.fb-weakness { background: var(--warning-light); }
+.fb-suggest  { background: var(--primary-light); }
+
+.results-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+/* ---- Analytics Page ---- */
+.chart-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#historyChart { width: 100%; max-height: 240px; }
+
+.category-bars { display: flex; flex-direction: column; gap: 0.8rem; }
+.category-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.2rem;
+}
+.cat-bar-label { min-width: 130px; font-weight: 600; font-size: 0.9rem; }
+.cat-bar-track {
+    flex: 1;
+    height: 12px;
+    background: var(--bg);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+.cat-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--primary), #7C3AED);
+    transition: width 0.8s ease;
+}
+.cat-bar-score { min-width: 44px; text-align: right; font-weight: 700; color: var(--primary); }
+
+.weak-areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+.weak-area-card {
+    background: var(--warning-light);
+    border: 1px solid #FDE68A;
+    border-radius: 10px;
+    padding: 1.1rem;
+}
+.weak-area-card h4 { font-size: 0.9rem; margin-bottom: 4px; color: #92400E; }
+.weak-area-card p { font-size: 0.8rem; color: #78350F; }
+
+@media (max-width: 640px) {
+    .review-feedback { grid-template-columns: 1fr; }
+    .results-actions { flex-direction: column; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+}
+/* ==========================================
+   Interview Mode
+========================================== */
+
+.interview-mode-container{
+
+    background:#ffffff;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:28px;
+
+    margin-bottom:35px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.mode-header{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+.mode-header h2{
+
+    font-size:1.7rem;
+
+    margin-bottom:8px;
+
+    color:var(--text);
+
+}
+
+.mode-header p{
+
+    color:var(--text-muted);
+
+    font-size:.95rem;
+
+}
+
+.mode-options{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+
+}
+
+.mode-card{
+
+    cursor:pointer;
+
+}
+
+.mode-card input{
+
+    display:none;
+
+}
+
+.mode-content{
+
+    background:#fff;
+
+    border:2px solid #E5E7EB;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.mode-card:hover .mode-content{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 10px 25px rgba(79,70,229,.15);
+
+    border-color:var(--primary);
+
+}
+
+.mode-card input:checked + .mode-content{
+
+    border-color:var(--primary);
+
+    background:linear-gradient(135deg,#EEF2FF,#F5F3FF);
+
+    box-shadow:0 15px 35px rgba(79,70,229,.2);
+
+}
+
+.mode-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#4F46E5,#7C3AED);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:2rem;
+
+    margin:0 auto 18px;
+
+}
+
+.mode-content h3{
+
+    margin-bottom:12px;
+
+    font-size:1.2rem;
+
+    color:var(--text);
+
+}
+
+.mode-content p{
+
+    color:var(--text-muted);
+
+    font-size:.9rem;
+
+    line-height:1.6;
+
+}
