@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Interview Simulator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">🤖 Interview Simulator</div>
+    <div class="nav-links">
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="/analytics.html">Analytics</a>
+        <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<div class="page-container">
+    <div class="results-header">
+        <h1>Interview Complete! 🎉</h1>
+        <p id="resultsSubtitle">Here's how you did</p>
+    </div>
+
+    <!-- Overall Score -->
+    <div class="overall-score-card">
+        <div class="big-score" id="overallScore">—</div>
+        <div class="big-score-label">Overall Score / 10</div>
+        <div class="score-badge" id="scoreBadge">—</div>
+    </div>
+
+    <!-- Score breakdown chart (simple bar) -->
+    <section class="section">
+        <h2 class="section-title">Score per Question</h2>
+        <div class="score-chart" id="scoreChart"></div>
+    </section>
+
+    <!-- Detailed results -->
+    <section class="section">
+        <h2 class="section-title">Detailed Review</h2>
+        <div id="detailedResults"></div>
+    </section>
+
+    <div class="results-actions">
+        <button class="btn btn-primary btn-lg" onclick="window.location.href='/dashboard.html'">
+            Practice Again
+        </button>
+        <button class="btn btn-outline btn-lg" onclick="window.location.href='/analytics.html'">
+            View Analytics
+        </button>
+    </div>
+</div>
+<script src="/js/auth.js"></script>
+<script src="/js/results.js"></script>
+</body>
+</html>
